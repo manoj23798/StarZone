@@ -66,7 +66,7 @@ const WomenServices = () => {
                         <p className="text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
                             From head to toe, we provide the ultimate pampering experience. Our therapeutic treatments and professional styling will leave you feeling confident and refreshed.
                         </p>
-                        <a href="https://wa.me/918248801668" className="btn-gold px-16">
+                        <a href="https://wa.me/918248801668" className="btn-gold px-10 md:px-16 whitespace-nowrap">
                             BOOK PAMPER SESSION
                         </a>
                     </motion.div>

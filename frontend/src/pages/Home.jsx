@@ -62,7 +62,7 @@ const Home = () => {
     return (
         <PageTransition>
             {/* Hero Section */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
+            <section className="relative h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-20">
                 {/* Background Overlay */}
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-black/70 z-10" />

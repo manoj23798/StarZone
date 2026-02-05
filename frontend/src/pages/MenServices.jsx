@@ -65,7 +65,7 @@ const MenServices = () => {
                         <p className="text-gray-400 mb-10 max-w-xl mx-auto">
                             Our master barbers are experts in classic and contemporary styles. Book your session now for a premium grooming experience.
                         </p>
-                        <a href="https://wa.me/918248801668" className="btn-gold inline-block">
+                        <a href="https://wa.me/918248801668" className="btn-gold px-10 md:px-16 whitespace-nowrap inline-block">
                             BOOK A SESSION
                         </a>
                     </motion.div>
