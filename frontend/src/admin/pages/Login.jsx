@@ -15,11 +15,12 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const success = await login(email, password);
-        if (success) {
+        setError('');
+        const res = await login(email, password);
+        if (res.success) {
             navigate('/admin');
         } else {
-            setError('Invalid credentials. Hint: admin@starzone.com / admin123');
+            setError(res.message || 'Invalid credentials.');
         }
     };
 
@@ -54,7 +55,7 @@ const Login = () => {
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="w-full bg-black border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-gold transition-colors"
-                                    placeholder="admin@starzone.com"
+                                    placeholder="ranjith@starzone.com"
                                     required
                                 />
                             </div>

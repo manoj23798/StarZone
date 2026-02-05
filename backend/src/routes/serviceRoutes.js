@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Service = require('../models/Service');
 
+const authMiddleware = require('../middleware/authMiddleware');
+
 // Get all services & content
 router.get('/', async (req, res) => {
     try {
@@ -12,8 +14,8 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Update all services & content (Admin only middleware would go here)
-router.post('/update', async (req, res) => {
+// Update all services & content
+router.post('/update', authMiddleware, async (req, res) => {
     try {
         let services = await Service.findOne();
         if (!services) {

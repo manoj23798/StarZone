@@ -102,7 +102,7 @@ const Contact = () => {
                             {/* Map Embed */}
                             <div className="rounded-3xl overflow-hidden h-[300px] border border-gold/20 shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15651.983734493392!2d77.72!3d11.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba96bd28537b0d7%3A0xe5a14d8753239e9d!2sBhavani%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1715423456789!5m2!1sen!2sin"
+                                    src={contact.mapUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15651.983734493392!2d77.72!3d11.35!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba96bd28537b0d7%3A0xe5a14d8753239e9d!2sBhavani%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1715423456789!5m2!1sen!2sin"}
                                     width="100%"
                                     height="100%"
                                     style={{ border: 0 }}

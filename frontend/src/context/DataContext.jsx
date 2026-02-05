@@ -12,7 +12,7 @@ export const DataProvider = ({ children }) => {
     const [gallery, setGallery] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const API_URL = 'http://localhost:5000/api';
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
     const fetchData = async () => {
         try {
@@ -20,14 +20,32 @@ export const DataProvider = ({ children }) => {
                 fetch(`${API_URL}/services`),
                 fetch(`${API_URL}/gallery`)
             ]);
+
+            if (!resServices.ok || !resGallery.ok) {
+                throw new Error('Server returned an error');
+            }
+
             const servicesData = await resServices.json();
             const galleryData = await resGallery.json();
 
-            setServices(servicesData);
-            setGallery(galleryData);
+            // Only update if we got valid objects, otherwise keep defaults
+            if (servicesData && typeof servicesData === 'object' && !Array.isArray(servicesData)) {
+                setServices(prev => ({
+                    ...prev,
+                    ...servicesData,
+                    contact: servicesData.contact || prev.contact,
+                    homeContent: servicesData.homeContent || prev.homeContent
+                }));
+            }
+
+            if (Array.isArray(galleryData)) {
+                setGallery(galleryData);
+            }
+
             setLoading(false);
         } catch (err) {
             console.error('Error fetching data:', err);
+            // Don't keep it loading forever, show whatever defaults we have
             setLoading(false);
         }
     };
@@ -37,15 +55,22 @@ export const DataProvider = ({ children }) => {
     }, []);
 
     const updateAllData = async (newData) => {
+        const token = localStorage.getItem('admin_token');
         try {
             const res = await fetch(`${API_URL}/services/update`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(newData)
             });
             const updated = await res.json();
-            setServices(updated);
-            return true;
+            if (res.ok) {
+                setServices(updated);
+                return true;
+            }
+            return false;
         } catch (err) {
             console.error('Update error:', err);
             return false;
@@ -53,23 +78,35 @@ export const DataProvider = ({ children }) => {
     };
 
     const addGalleryItem = async (item) => {
+        const token = localStorage.getItem('admin_token');
         try {
             const res = await fetch(`${API_URL}/gallery`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(item)
             });
             const newItem = await res.json();
-            setGallery([newItem, ...gallery]);
+            if (res.ok) {
+                setGallery([newItem, ...gallery]);
+            }
         } catch (err) {
             console.error('Gallery upload error:', err);
         }
     };
 
     const deleteGalleryItem = async (id) => {
+        const token = localStorage.getItem('admin_token');
         try {
-            await fetch(`${API_URL}/gallery/${id}`, { method: 'DELETE' });
-            setGallery(gallery.filter(i => i._id !== id));
+            const res = await fetch(`${API_URL}/gallery/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) {
+                setGallery(gallery.filter(i => i._id !== id));
+            }
         } catch (err) {
             console.error('Gallery delete error:', err);
         }

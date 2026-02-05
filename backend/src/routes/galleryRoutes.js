@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Gallery = require('../models/Gallery');
 
+const authMiddleware = require('../middleware/authMiddleware');
+
 // Get all gallery items
 router.get('/', async (req, res) => {
     try {
@@ -13,7 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 // Add gallery item
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
     const item = new Gallery(req.body);
     try {
         const newItem = await item.save();
@@ -24,7 +26,7 @@ router.post('/', async (req, res) => {
 });
 
 // Delete gallery item
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
     try {
         await Gallery.findByIdAndDelete(req.params.id);
         res.json({ message: 'Deleted successfully' });

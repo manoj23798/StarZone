@@ -1,0 +1,55 @@
+# Complete Step-by-Step Deployment Guide (FREE) 🚀
+
+Follow these exact steps in order to take your Star Zone website live.
+
+### Step 1: Put your code on GitHub
+1. Create a [GitHub](https://github.com/) account if you don't have one.
+2. Create a new **Public Repository** named `salon-web`.
+3. Open your terminal in the `salon web` folder and run these commands:
+   ```bash
+   git init
+   git add .
+   git commit -m "Production ready build"
+   git branch -M main
+   git remote add origin YOUR_REPOSITORY_URL
+   git push -u origin main
+   ```
+
+### Step 2: Prepare your Database (MongoDB)
+1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+2. Go to **Network Access** > **Add IP Address** > Click **Allow Access From Anywhere** > **Confirm**.
+3. Go to **Database** > **Connect** > **Drivers** > Copy the **Connection String** (Looks like `mongodb+srv://...`).
+   > [!IMPORTANT]
+   > Replace `<password>` in the link with your actual MongoDB password.
+
+### Step 3: Deploy the Backend (Render)
+1. Go to [Render.com](https://render.com/) and create a free account.
+2. Click **New +** > **Web Service**.
+3. Connect your GitHub repository.
+4. Use these settings:
+   - **Name**: `starzone-api`
+   - **Root Directory**: `backend`
+   - **Build Command**: `npm install`
+   - **Start Command**: `node src/index.js`
+5. Click **Advanced** > **Add Environment Variable**:
+   - `MONGO_URI` = (Paste your MongoDB string from Step 2)
+   - `JWT_SECRET` = (Make up a long random password like `ranjith_star_luxe_secret_2026`)
+   - `PORT` = `5000`
+6. Click **Create Web Service**.
+7. **Wait for it to finish.** Copy the URL Render gives you (e.g., `https://starzone-api.onrender.com`).
+
+### Step 4: Deploy the Frontend (Vercel)
+1. Go to [Vercel.com](https://vercel.com/) and create a free account.
+2. Click **Add New** > **Project**.
+3. Import your `salon-web` repository.
+4. Click **Edit** next to "Root Directory" and select the `frontend` folder.
+5. Click **Environment Variables** and add:
+   - `VITE_API_URL` = (Paste your Backend URL from Step 3 + `/api`)
+     *Example: `https://starzone-api.onrender.com/api`*
+6. Click **Deploy**.
+
+**You are DONE!** 🏁
+Your website is live! Your admin panel will be at `your-vercel-url/admin`.
+
+> [!TIP]
+> Use your new credentials (**ranjith@starzone.com** / **ranjithstarzone**) to log in to the admin panel after hosting.

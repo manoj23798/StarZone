@@ -20,14 +20,14 @@ const Dashboard = () => {
 
     return (
         <div className="space-y-10">
-            <div className="flex flex-col md:row justify-between items-start md:items-center gap-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
-                    <h1 className="text-4xl font-heading mb-2">System Dashboard</h1>
+                    <h1 className="text-3xl md:text-4xl font-heading mb-2">System Dashboard</h1>
                     <p className="text-gray-500 text-sm">Real-time control center for Star Zone Salon.</p>
                 </div>
-                <div className="flex space-x-4">
-                    <Link to="/admin/settings" className="px-6 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-bold hover:bg-white/10 transition-all uppercase tracking-widest">System Check</Link>
-                    <button className="admin-btn-gold">Refresh Data</button>
+                <div className="flex space-x-3 w-full md:w-auto">
+                    <Link to="/admin/settings" className="flex-grow md:flex-grow-0 px-6 py-2 bg-white/5 border border-white/10 rounded-lg text-xs font-bold hover:bg-white/10 transition-all uppercase tracking-widest text-center">System Check</Link>
+                    <button className="flex-grow md:flex-grow-0 admin-btn-gold py-2 px-6">Refresh</button>
                 </div>
             </div>
 

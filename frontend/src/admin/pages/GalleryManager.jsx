@@ -42,14 +42,14 @@ const GalleryManager = () => {
 
     return (
         <div className="space-y-10">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start lg:items-center space-y-4 md:space-y-0">
                 <div>
-                    <h1 className="text-3xl font-heading">Gallery Manager</h1>
-                    <p className="text-gray-500 text-sm">Upload and organize portfolio images.</p>
+                    <h1 className="text-2xl md:text-3xl font-heading">Gallery Manager</h1>
+                    <p className="text-gray-500 text-xs md:text-sm">Upload and organize portfolio images.</p>
                 </div>
                 <button
                     onClick={() => setShowAdd(true)}
-                    className="admin-btn-gold flex items-center space-x-2"
+                    className="admin-btn-gold flex items-center justify-center space-x-2 w-full md:w-auto"
                 >
                     <Camera size={18} />
                     <span>UPLOAD IMAGE</span>
@@ -81,7 +81,7 @@ const GalleryManager = () => {
                             className="admin-card p-2 group relative aspect-[4/5]"
                         >
                             <img src={img.url} alt="" className="w-full h-full object-cover rounded-xl" />
-                            <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className="absolute top-4 right-4 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                 <button
                                     onClick={() => handleDelete(img._id)}
                                     className="p-2 bg-red-500 text-white rounded-lg shadow-xl"

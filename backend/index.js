@@ -11,18 +11,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Request logger
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
+});
+
 // API Routes
-const apiRouter = express.Router();
+const authRoutes = require('./src/routes/authRoutes');
+const serviceRoutes = require('./src/routes/serviceRoutes');
+const galleryRoutes = require('./src/routes/galleryRoutes');
 
-// Health check
-apiRouter.get('/health', (req, res) => res.json({ status: 'ok' }));
+app.use('/api/auth', authRoutes);
+app.use('/api/services', serviceRoutes);
+app.use('/api/gallery', galleryRoutes);
 
-// Other Routes
-apiRouter.use('/services', require('./src/routes/serviceRoutes'));
-apiRouter.use('/gallery', require('./src/routes/galleryRoutes'));
-apiRouter.use('/auth', require('./src/routes/authRoutes'));
-
-app.use('/api', apiRouter);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

@@ -15,14 +15,14 @@ const MenServices = () => {
 
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start lg:items-center space-y-4 md:space-y-0">
                 <div>
-                    <h1 className="text-3xl font-heading">Men's Services</h1>
-                    <p className="text-gray-500 text-sm">Manage pricing and availability for men's grooming.</p>
+                    <h1 className="text-2xl md:text-3xl font-heading">Men's Services</h1>
+                    <p className="text-gray-500 text-xs md:text-sm">Manage pricing and availability for men's grooming.</p>
                 </div>
                 <button
                     onClick={() => setShowAddModal(true)}
-                    className="admin-btn-gold flex items-center space-x-2"
+                    className="admin-btn-gold flex items-center justify-center space-x-2 w-full md:w-auto"
                 >
                     <Plus size={18} />
                     <span>ADD NEW SERVICE</span>
@@ -57,7 +57,7 @@ const MenServices = () => {
                                             <span className="font-bold text-white group-hover:text-gold transition-colors">{service.name}</span>
                                             <span className="text-gold font-black">₹{service.price}</span>
                                         </div>
-                                        <div className="flex justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <div className="flex justify-end space-x-2 md:opacity-0 group-hover:opacity-100 transition-opacity">
                                             <button
                                                 onClick={() => setEditingService({ gender: 'men', catIdx, sIdx, ...service })}
                                                 className="p-2 hover:bg-gold/10 text-gray-500 hover:text-gold rounded-lg transition-all"

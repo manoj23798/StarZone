@@ -83,12 +83,18 @@ const ContactEditor = () => {
                                 className="admin-input h-32 resize-none"
                             />
                         </div>
-                        <div className="p-4 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between group">
-                            <div className="flex items-center space-x-3">
-                                <ExternalLink size={16} className="text-gray-500" />
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Google Map Link</span>
+                        <div className="space-y-4">
+                            <div className="flex items-center space-x-3 mb-2">
+                                <ExternalLink size={16} className="text-gold" />
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Google Map URL</label>
                             </div>
-                            <button className="text-[10px] text-gold font-black uppercase underline">Edit Link</button>
+                            <input
+                                type="text"
+                                placeholder="Paste Google Maps URL here..."
+                                value={formData.mapUrl || ''}
+                                onChange={(e) => setFormData({ ...formData, mapUrl: e.target.value })}
+                                className="admin-input"
+                            />
                         </div>
                     </div>
                 </div>

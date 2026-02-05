@@ -15,14 +15,14 @@ const WomenServices = () => {
 
     return (
         <div className="space-y-8">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start lg:items-center space-y-4 md:space-y-0">
                 <div>
-                    <h1 className="text-3xl font-heading">Women's Services</h1>
-                    <p className="text-gray-500 text-sm">Full control over beauty and makeup services.</p>
+                    <h1 className="text-2xl md:text-3xl font-heading">Women's Services</h1>
+                    <p className="text-gray-500 text-xs md:text-sm">Full control over beauty and makeup services.</p>
                 </div>
                 <button
                     onClick={() => setShowAddModal(true)}
-                    className="admin-btn-gold bg-pink-500 hover:bg-pink-600 text-white flex items-center space-x-2"
+                    className="admin-btn-gold bg-pink-500 hover:bg-pink-600 text-white flex items-center justify-center space-x-2 w-full md:w-auto"
                 >
                     <Plus size={18} />
                     <span>ADD SERVICE</span>
@@ -58,13 +58,13 @@ const WomenServices = () => {
                                             <div className="flex space-x-1">
                                                 <button
                                                     onClick={() => setEditingService({ gender: 'women', catIdx, sIdx, ...service })}
-                                                    className="p-1.5 hover:bg-gold/10 text-gray-600 hover:text-gold rounded transition-all"
+                                                    className="p-1.5 hover:bg-gold/10 text-gray-400 hover:text-gold rounded transition-all"
                                                 >
                                                     <Edit2 size={14} />
                                                 </button>
                                                 <button
                                                     onClick={() => deleteService('women', catIdx, sIdx)}
-                                                    className="p-1.5 hover:bg-red-400/10 text-gray-600 hover:text-red-400 rounded transition-all"
+                                                    className="p-1.5 hover:bg-red-400/10 text-gray-400 hover:text-red-400 rounded transition-all"
                                                 >
                                                     <Trash2 size={14} />
                                                 </button>
