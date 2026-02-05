@@ -1,0 +1,138 @@
+import { createContext, useContext, useState, useEffect } from 'react';
+
+const DataContext = createContext();
+
+export const DataProvider = ({ children }) => {
+    const [services, setServices] = useState({
+        men: [],
+        women: [],
+        contact: { phones: [], address: '', instagram: '' },
+        homeContent: { heroTitle: 'Star Zone', heroSubtitle: '', heroTagline: '', heroImage: '' }
+    });
+    const [gallery, setGallery] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const API_URL = 'http://localhost:5000/api';
+
+    const fetchData = async () => {
+        try {
+            const [resServices, resGallery] = await Promise.all([
+                fetch(`${API_URL}/services`),
+                fetch(`${API_URL}/gallery`)
+            ]);
+            const servicesData = await resServices.json();
+            const galleryData = await resGallery.json();
+
+            setServices(servicesData);
+            setGallery(galleryData);
+            setLoading(false);
+        } catch (err) {
+            console.error('Error fetching data:', err);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const updateAllData = async (newData) => {
+        try {
+            const res = await fetch(`${API_URL}/services/update`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newData)
+            });
+            const updated = await res.json();
+            setServices(updated);
+            return true;
+        } catch (err) {
+            console.error('Update error:', err);
+            return false;
+        }
+    };
+
+    const addGalleryItem = async (item) => {
+        try {
+            const res = await fetch(`${API_URL}/gallery`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            });
+            const newItem = await res.json();
+            setGallery([newItem, ...gallery]);
+        } catch (err) {
+            console.error('Gallery upload error:', err);
+        }
+    };
+
+    const deleteGalleryItem = async (id) => {
+        try {
+            await fetch(`${API_URL}/gallery/${id}`, { method: 'DELETE' });
+            setGallery(gallery.filter(i => i._id !== id));
+        } catch (err) {
+            console.error('Gallery delete error:', err);
+        }
+    };
+
+    const updateService = async (gender, catIdx, sIdx, updatedItem) => {
+        const newData = { ...services };
+        newData[gender][catIdx].services[sIdx] = updatedItem;
+        return await updateAllData(newData);
+    };
+
+    const addService = async (gender, categoryName, newItem) => {
+        const newData = { ...services };
+        const cat = newData[gender].find(c => c.category === categoryName);
+        if (cat) {
+            cat.services.push(newItem);
+            return await updateAllData(newData);
+        }
+    };
+
+    const deleteService = async (gender, catIdx, sIdx) => {
+        const newData = { ...services };
+        newData[gender][catIdx].services.splice(sIdx, 1);
+        return await updateAllData(newData);
+    };
+
+    const uploadImage = async (file) => {
+        const IMGBB_API_KEY = 'c1552e78533f6604dcbd6cc0aedff0c8';
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            console.log("📤 Uploading to ImgBB...");
+            const res = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                console.log("✅ ImgBB Upload Success:", data.data.url);
+                return data.data.url;
+            } else {
+                console.error("❌ ImgBB Error:", data.error);
+                return null;
+            }
+        } catch (err) {
+            console.error('Network Error during ImgBB upload:', err);
+            return null;
+        }
+    };
+
+    return (
+        <DataContext.Provider value={{
+            services, gallery, loading,
+            updateAllData, updateService, addService, deleteService,
+            addGalleryItem, deleteGalleryItem, uploadImage,
+            refresh: fetchData
+        }}>
+            {children}
+        </DataContext.Provider>
+    );
+};
+
+export const useData = () => useContext(DataContext);

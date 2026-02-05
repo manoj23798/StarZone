@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@layer theme {
+  :root {
+    --gold: #DAA520;
+    --gold-light: #FFBF00;
+    --black: #0A0A0A;
+    --black-light: #1A1A1A;
+    --text-gold: #DAA520;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+  }
+}
+
+@theme {
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-black-main: var(--black);
+  --color-black-card: var(--black-light);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+@layer base {
+  body {
+    @apply bg-black-main text-white font-body overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-wider;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply px-8 py-3 bg-gold text-black-main font-bold rounded-full transition-all duration-300 hover:bg-gold-light active:scale-95;
+  }
+
+  .btn-gold:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  }
+
+  .btn-outline-gold {
+    @apply px-8 py-3 border-2 border-gold text-gold font-bold rounded-full transition-all duration-300 hover:bg-gold hover:text-black-main active:scale-95;
+  }
+
+  .btn-outline-gold:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl p-8 transition-all duration-500 hover:bg-white/[0.05] hover:border-gold/30;
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-card:hover {
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.2),
+      0 20px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .glow-text {
+    @apply text-gold animate-pulse;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+  }
+
+  .gold-gradient {
+    @apply bg-gradient-to-r from-gold via-[#F9A825] to-gold;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Admin Styles */
+  .admin-card {
+    @apply bg-black-card border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-gold/30 shadow-2xl;
+  }
+
+  .admin-btn-gold {
+    @apply px-8 py-3 bg-gold text-black-main font-black rounded-xl transition-all duration-300 hover:bg-gold-light active:scale-95 text-xs tracking-widest uppercase;
+  }
+
+  .admin-btn-gold:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .admin-input {
+    @apply w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-gold transition-all placeholder:text-gray-600;
+    display: block;
+  }
+
+  .admin-input:focus {
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3);
+  }
+
+  .admin-label {
+    @apply block text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-2;
+  }
+
+  .sidebar-link {
+    @apply flex items-center space-x-4 px-5 py-4 rounded-2xl transition-all duration-300 text-gray-400 hover:text-white hover:bg-white/5;
+  }
+
+  .sidebar-link-active {
+    @apply bg-gold text-black-main font-black hover:bg-gold hover:text-black-main;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+  }
+
+  .sidebar-link-active svg {
+    @apply text-black-main;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-black-main;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gold rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gold-light;
+}
