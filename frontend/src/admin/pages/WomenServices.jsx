@@ -11,7 +11,13 @@ const WomenServices = () => {
 
     if (loading || !services) return <div>Loading Services...</div>;
 
-    const [newService, setNewService] = useState({ name: '', price: '', category: services.women[0].category });
+    const [newService, setNewService] = useState({ name: '', price: '', category: '' });
+
+    useEffect(() => {
+        if (services?.women?.length > 0 && !newService.category) {
+            setNewService(prev => ({ ...prev, category: services.women[0].category }));
+        }
+    }, [services]);
 
     return (
         <div className="space-y-8">
