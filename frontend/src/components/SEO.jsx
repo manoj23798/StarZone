@@ -11,7 +11,7 @@ const SEO = ({ title, description, image, url }) => {
             {/* Basic Meta Tags */}
             <title>{title ? `${title} | Star Zone` : siteTitle}</title>
             <meta name="description" content={description || defaultDesc} />
-            <meta name="google-site-verification" content="iWw1upGG9roSHHuXHIxYTpgGGQ-BlX5cOmobivW25LE" />
+            <meta name="google-site-verification" content="5da575979067f9f0" />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />

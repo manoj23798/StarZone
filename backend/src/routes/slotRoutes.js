@@ -16,18 +16,6 @@ const cleanupPastSlots = async () => {
     }
 };
 
-// Get unavailable slots for a specific date
-router.get('/:date', async (req, res) => {
-    try {
-        await cleanupPastSlots(); // Auto-cleanup on fetch
-        const { date } = req.params;
-        const slotData = await Slot.findOne({ date });
-        res.json(slotData ? slotData.unavailableSlots : []);
-    } catch (error) {
-        res.status(500).json({ message: 'Error fetching slots', error: error.message });
-    }
-});
-
 // Toggle slot availability (Admin only)
 router.post('/toggle', authMiddleware, async (req, res) => {
     try {
@@ -67,6 +55,18 @@ router.post('/toggle', authMiddleware, async (req, res) => {
             message: 'Error toggling slot',
             error: error.message
         });
+    }
+});
+
+// Get unavailable slots for a specific date
+router.get('/:date', async (req, res) => {
+    try {
+        await cleanupPastSlots(); // Auto-cleanup on fetch
+        const { date } = req.params;
+        const slotData = await Slot.findOne({ date });
+        res.json(slotData ? slotData.unavailableSlots : []);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching slots', error: error.message });
     }
 });
 
