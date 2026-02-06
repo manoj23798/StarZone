@@ -10,7 +10,7 @@ import { API_URL } from '../config';
 
 const CartPage = () => {
     const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
-    const [userData, setUserData] = useState({ name: '', phone: '', date: '', time: '', gender: '', ageGroup: '' });
+    const [userData, setUserData] = useState({ name: '', phone: '', date: '', time: '', gender: '' });
     const [isBooking, setIsBooking] = useState(false);
     const [unavailableSlots, setUnavailableSlots] = useState([]);
     const [slotsLoading, setSlotsLoading] = useState(false);
@@ -48,8 +48,8 @@ const CartPage = () => {
 
     const handleBooking = (e) => {
         e.preventDefault();
-        if (!userData.name || !userData.phone || !userData.date || !userData.time || !userData.gender || !userData.ageGroup) {
-            alert("Please complete all booking details (Gender, Age, Name, Phone, Date, and Time).");
+        if (!userData.name || !userData.phone || !userData.date || !userData.time || !userData.gender) {
+            alert("Please complete all booking details (Gender, Name, Phone, Date, and Time).");
             return;
         }
 
@@ -221,27 +221,6 @@ const CartPage = () => {
                                         </div>
                                     </div>
 
-                                    <div>
-                                        <label className="block text-gray-400 text-[10px] uppercase tracking-widest mb-3 px-1 font-black">Age Group</label>
-                                        <div className="grid grid-cols-3 gap-2">
-                                            {['18-25', '26-40', '40+'].map((group) => (
-                                                <button
-                                                    key={group}
-                                                    type="button"
-                                                    onClick={() => {
-                                                        setUserData({ ...userData, ageGroup: group });
-                                                        axios.post(`${API_URL}/analytics/track/age_${group}`);
-                                                    }}
-                                                    className={`py-3 rounded-xl text-[10px] font-bold transition-all border-2 ${userData.ageGroup === group
-                                                        ? 'bg-gold/20 border-gold text-white shadow-[0_0_10px_rgba(212,175,55,0.3)]'
-                                                        : 'bg-black/40 border-gold/10 text-gray-400 hover:border-gold/30'
-                                                        }`}
-                                                >
-                                                    {group}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
 
                                     <div>
                                         <label className="block text-gray-400 text-[10px] uppercase tracking-widest mb-2 px-1 font-black">Full Name</label>
