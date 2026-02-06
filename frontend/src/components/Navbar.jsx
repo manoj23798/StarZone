@@ -66,9 +66,9 @@ const Navbar = () => {
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
-                    <Link to="/" className="flex items-center space-x-3 group">
-                        <img src={logo} alt="Star Zone Logo" className="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-110" />
-                        <span className="text-2xl md:text-3xl font-heading font-black tracking-tighter text-gold">
+                    <Link to="/" className="flex items-center space-x-2 md:space-x-3 group">
+                        <img src={logo} alt="Star Zone Logo" className="h-8 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-110" />
+                        <span className="text-xl md:text-3xl font-heading font-black tracking-tighter text-gold">
                             STAR <span className="text-white">ZONE</span>
                         </span>
                     </Link>
@@ -110,25 +110,27 @@ const Navbar = () => {
                         exit={{ opacity: 0, height: 0 }}
                         className="md:hidden bg-black-card/95 border-t border-gold/10 overflow-hidden"
                     >
-                        <div className="px-4 pt-4 pb-6 space-y-4">
+                        <div className="px-4 pt-4 pb-8 space-y-2">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     to={link.path}
                                     onClick={() => setIsOpen(false)}
-                                    className={`block text-xl font-heading py-2 ${location.pathname === link.path ? 'text-gold' : 'text-white'
+                                    className={`block text-lg font-heading py-3 px-2 rounded-lg transition-colors ${location.pathname === link.path ? 'bg-gold/10 text-gold' : 'text-white active:bg-white/5'
                                         }`}
                                 >
                                     {link.name}
                                 </Link>
                             ))}
-                            <a
-                                href="https://wa.me/918248801668"
-                                className="btn-gold flex justify-center items-center space-x-2 w-full mt-4"
-                            >
-                                <Phone size={18} />
-                                <span>BOOK APPOINTMENT</span>
-                            </a>
+                            <div className="pt-4">
+                                <a
+                                    href="https://wa.me/918248801668"
+                                    className="btn-gold flex justify-center items-center space-x-2 w-full py-4"
+                                >
+                                    <Phone size={18} />
+                                    <span>BOOK APPOINTMENT</span>
+                                </a>
+                            </div>
                         </div>
                     </motion.div>
                 )}

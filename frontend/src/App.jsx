@@ -40,7 +40,21 @@ const PublicLayout = () => {
       if (!sessionStorage.getItem('starzone_visited')) {
         try {
           const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+          // 1. Track general visit
           await fetch(`${API_URL}/analytics/track/visit`, { method: 'POST' });
+
+          // 2. Track Location (City) via IP
+          try {
+            const geoRes = await fetch('https://ipapi.co/json/');
+            const geoData = await geoRes.json();
+            if (geoData.city) {
+              await fetch(`${API_URL}/analytics/track/city_${geoData.city}`, { method: 'POST' });
+            }
+          } catch (geoErr) {
+            console.warn('Location tracking failed:', geoErr);
+          }
+
           sessionStorage.setItem('starzone_visited', 'true');
         } catch (err) {
           console.error('Visit tracking failed:', err);

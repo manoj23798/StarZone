@@ -55,11 +55,11 @@ const Contact = () => {
                         subtitle="Let's start your transformation"
                     />
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
                         {/* Info and Map */}
-                        <div className="space-y-12">
+                        <div className="space-y-10 md:space-y-12">
                             <div>
-                                <h3 className="text-3xl font-heading text-white mb-8">Visit The Zone</h3>
+                                <h3 className="text-2xl md:text-3xl font-heading text-white mb-6 md:mb-8">Visit The Zone</h3>
                                 <div className="space-y-6">
                                     <div className="flex items-start space-x-6 group">
                                         <div className="p-4 bg-gold/10 rounded-full group-hover:bg-gold transition-colors text-gold group-hover:text-black">
@@ -123,9 +123,9 @@ const Contact = () => {
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="glass-card p-12 bg-black-card/50"
+                            className="glass-card p-6 md:p-12 bg-black-card/50"
                         >
-                            <h3 className="text-3xl font-heading text-gold mb-8">Send A Message</h3>
+                            <h3 className="text-2xl md:text-3xl font-heading text-gold mb-6 md:mb-8">Send A Message</h3>
                             <form className="space-y-6" onSubmit={handleSubmit}>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">

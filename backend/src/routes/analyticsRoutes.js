@@ -4,30 +4,57 @@ const mongoose = require('mongoose');
 const Analytics = require('../models/Analytics');
 const authMiddleware = require('../middleware/authMiddleware');
 
-// Get all stats (Visits, Bookings, DB Stats)
+// Get all stats (Visits, Bookings, DB Stats, Demographics)
 router.get('/stats', async (req, res) => {
     try {
-        // 1. Fetch our custom counts
-        const visits = await Analytics.findOne({ type: 'visit' });
-        const bookings = await Analytics.findOne({ type: 'booking' });
+        // 1. Fetch all custom counts
+        const allAnalytics = await Analytics.find({});
+
+        const stats = {
+            visits: 0,
+            bookings: 0,
+            menVisits: 0,
+            womenVisits: 0,
+            locations: {},
+            genders: { male: 0, female: 0 },
+            ages: {}
+        };
+
+        allAnalytics.forEach(item => {
+            if (item.type === 'visit') stats.visits = item.count;
+            else if (item.type === 'booking') stats.bookings = item.count;
+            else if (item.type === 'men_visit') stats.menVisits = item.count;
+            else if (item.type === 'women_visit') stats.womenVisits = item.count;
+            else if (item.type.startsWith('city_')) {
+                const city = item.type.replace('city_', '');
+                stats.locations[city] = item.count;
+            }
+            else if (item.type.startsWith('gender_')) {
+                const gender = item.type.replace('gender_', '').toLowerCase();
+                stats.genders[gender] = item.count;
+            }
+            else if (item.type.startsWith('age_')) {
+                const age = item.type.replace('age_', '');
+                stats.ages[age] = item.count;
+            }
+        });
 
         // 2. Fetch DB Storage Stats
-        const stats = await mongoose.connection.db.stats();
+        const dbStats = await mongoose.connection.db.stats();
 
         // Convert bytes to MB for display
-        const dataSizeMB = (stats.dataSize / (1024 * 1024)).toFixed(2);
-        const indexSizeMB = (stats.indexSize / (1024 * 1024)).toFixed(2);
-        const storageSizeMB = (stats.storageSize / (1024 * 1024)).toFixed(2);
+        const dataSizeMB = (dbStats.dataSize / (1024 * 1024)).toFixed(2);
+        const indexSizeMB = (dbStats.indexSize / (1024 * 1024)).toFixed(2);
+        const storageSizeMB = (dbStats.storageSize / (1024 * 1024)).toFixed(2);
 
         res.json({
-            visits: visits ? visits.count : 0,
-            bookings: bookings ? bookings.count : 0,
+            ...stats,
             db: {
                 dataSize: `${dataSizeMB} MB`,
                 indexSize: `${indexSizeMB} MB`,
                 storageSize: `${storageSizeMB} MB`,
-                objects: stats.objects,
-                collections: stats.collections
+                objects: dbStats.objects,
+                collections: dbStats.collections
             },
             performance: {
                 status: 'Healthy',
@@ -41,13 +68,10 @@ router.get('/stats', async (req, res) => {
     }
 });
 
-// Track a visit or booking
+// Track any type (dynamic)
 router.post('/track/:type', async (req, res) => {
     try {
         const { type } = req.params;
-        if (!['visit', 'booking'].includes(type)) {
-            return res.status(400).json({ message: 'Invalid track type' });
-        }
 
         let stat = await Analytics.findOne({ type });
         if (!stat) {

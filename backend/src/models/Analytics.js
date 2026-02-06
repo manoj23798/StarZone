@@ -4,7 +4,6 @@ const analyticsSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ['visit', 'booking'],
         unique: true
     },
     count: {

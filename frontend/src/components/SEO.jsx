@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, image, url }) => {
-    const siteTitle = "Star Zone | Luxury Unisex Salon";
-    const defaultDesc = "Star Zone Salon - The premium unisex hair and style salon in Erode. Expert haircuts, bridal makeup, and radiant skin care.";
+    const siteTitle = "Star Zone | Top-Rated Luxury Unisex Salon in Erode";
+    const defaultDesc = "Experience the best haircuts, expert bridal makeup, and radiant skincare at Star Zone – Erode's premier luxury salon. 10+ years of expert styling.";
     const siteUrl = "https://star-zone.vercel.app";
     const defaultImage = "/logo.png";
 
@@ -11,6 +11,7 @@ const SEO = ({ title, description, image, url }) => {
             {/* Basic Meta Tags */}
             <title>{title ? `${title} | Star Zone` : siteTitle}</title>
             <meta name="description" content={description || defaultDesc} />
+            <meta name="google-site-verification" content="iWw1upGG9roSHHuXHIxYTpgGGQ-BlX5cOmobivW25LE" />
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />

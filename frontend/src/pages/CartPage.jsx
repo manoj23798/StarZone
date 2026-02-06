@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const CartPage = () => {
     const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
-    const [userData, setUserData] = useState({ name: '', phone: '', date: '', time: '', gender: '' });
+    const [userData, setUserData] = useState({ name: '', phone: '', date: '', time: '', gender: '', ageGroup: '' });
     const [isBooking, setIsBooking] = useState(false);
     const [unavailableSlots, setUnavailableSlots] = useState([]);
     const [slotsLoading, setSlotsLoading] = useState(false);
@@ -48,8 +48,8 @@ const CartPage = () => {
 
     const handleBooking = (e) => {
         e.preventDefault();
-        if (!userData.name || !userData.phone || !userData.date || !userData.time || !userData.gender) {
-            alert("Please complete all booking details (Gender, Name, Phone, Date, and Time).");
+        if (!userData.name || !userData.phone || !userData.date || !userData.time || !userData.gender || !userData.ageGroup) {
+            alert("Please complete all booking details (Gender, Age, Name, Phone, Date, and Time).");
             return;
         }
 
@@ -125,7 +125,7 @@ const CartPage = () => {
                         subtitle="Review your selection and book your appointment"
                     />
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10 mt-8 md:mt-12">
                         {/* Cart Items List */}
                         <div className="lg:col-span-2 space-y-6">
                             <AnimatePresence mode='popLayout'>
@@ -136,26 +136,26 @@ const CartPage = () => {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         exit={{ opacity: 0, scale: 0.9 }}
-                                        className="glass-card p-6 flex flex-col sm:flex-row justify-between items-center group"
+                                        className="glass-card p-4 md:p-6 flex flex-col sm:flex-row justify-between items-center group"
                                     >
-                                        <div className="flex items-center space-x-5 mb-4 sm:mb-0">
-                                            <div className="p-3 bg-gold/10 rounded-xl group-hover:bg-gold/20 transition-colors">
-                                                {item.type === 'offer' ? <Tag size={20} className="text-gold" /> : <Scissors size={20} className="text-gold" />}
+                                        <div className="flex items-center space-x-4 md:space-x-5 mb-4 sm:mb-0 w-full sm:w-auto">
+                                            <div className="p-2 md:p-3 bg-gold/10 rounded-xl group-hover:bg-gold/20 transition-colors shrink-0">
+                                                {item.type === 'offer' ? <Tag size={18} md:size={20} className="text-gold" /> : <Scissors size={18} md:size={20} className="text-gold" />}
                                             </div>
-                                            <div>
-                                                <h4 className="text-xl font-heading text-white">{item.name}</h4>
-                                                {item.category && <p className="text-gray-500 text-sm uppercase tracking-widest">{item.category}</p>}
-                                                {item.details && <p className="text-gray-400 text-xs mt-1 italic">{item.details}</p>}
+                                            <div className="min-w-0">
+                                                <h4 className="text-lg md:text-xl font-heading text-white truncate">{item.name}</h4>
+                                                {item.category && <p className="text-gray-500 text-[10px] md:text-sm uppercase tracking-widest truncate">{item.category}</p>}
+                                                {item.details && <p className="text-gray-400 text-[10px] mt-1 italic line-clamp-1">{item.details}</p>}
                                             </div>
                                         </div>
-                                        <div className="flex items-center space-x-8">
-                                            <span className="text-gold font-bold text-2xl">₹{item.price}</span>
+                                        <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto sm:space-x-8 mt-2 sm:mt-0 pt-4 sm:pt-0 border-t sm:border-none border-white/5">
+                                            <span className="text-gold font-bold text-xl md:text-2xl">₹{item.price}</span>
                                             <button
                                                 onClick={() => handleRemove(item.id, item.name)}
                                                 className="p-2 text-gray-500 hover:text-red-500 transition-colors"
                                                 title="Remove Item"
                                             >
-                                                <Trash2 size={20} />
+                                                <Trash2 size={18} md:size={20} />
                                             </button>
                                         </div>
                                     </motion.div>
@@ -180,11 +180,11 @@ const CartPage = () => {
                         {/* Booking Form */}
                         <div className="lg:col-span-1">
                             <div className="glass-card p-8 sticky top-32">
-                                <div className="flex items-center space-x-3 mb-8">
+                                <div className="flex items-center space-x-3 mb-6 md:mb-8">
                                     <div className="p-2 bg-gold/20 rounded-lg">
-                                        <MessageSquare size={20} className="text-gold" />
+                                        <MessageSquare size={18} md:size={20} className="text-gold" />
                                     </div>
-                                    <h3 className="text-2xl font-heading text-white">Booking Details</h3>
+                                    <h3 className="text-xl md:text-2xl font-heading text-white">Booking Details</h3>
                                 </div>
 
                                 <form onSubmit={handleBooking} className="space-y-6">
@@ -193,10 +193,13 @@ const CartPage = () => {
                                         <div className="grid grid-cols-2 gap-4">
                                             <button
                                                 type="button"
-                                                onClick={() => setUserData({ ...userData, gender: 'Male' })}
+                                                onClick={() => {
+                                                    setUserData({ ...userData, gender: 'Male' });
+                                                    axios.post(`${API_URL}/analytics/track/gender_male`);
+                                                }}
                                                 className={`py-4 rounded-xl flex items-center justify-center space-x-3 transition-all border-2 ${userData.gender === 'Male'
-                                                        ? 'bg-gold/20 border-gold text-white shadow-[0_0_15px_rgba(212,175,55,0.3)]'
-                                                        : 'bg-black/40 border-gold/10 text-gray-400 hover:border-gold/30'
+                                                    ? 'bg-gold/20 border-gold text-white shadow-[0_0_15px_rgba(212,175,55,0.3)]'
+                                                    : 'bg-black/40 border-gold/10 text-gray-400 hover:border-gold/30'
                                                     }`}
                                             >
                                                 <Mars size={18} className={userData.gender === 'Male' ? 'text-gold' : 'text-gray-500'} />
@@ -204,15 +207,40 @@ const CartPage = () => {
                                             </button>
                                             <button
                                                 type="button"
-                                                onClick={() => setUserData({ ...userData, gender: 'Female' })}
+                                                onClick={() => {
+                                                    setUserData({ ...userData, gender: 'Female' });
+                                                    axios.post(`${API_URL}/analytics/track/gender_female`);
+                                                }}
                                                 className={`py-4 rounded-xl flex items-center justify-center space-x-3 transition-all border-2 ${userData.gender === 'Female'
-                                                        ? 'bg-gold/20 border-gold text-white shadow-[0_0_15px_rgba(212,175,55,0.3)]'
-                                                        : 'bg-black/40 border-gold/10 text-gray-400 hover:border-gold/30'
+                                                    ? 'bg-gold/20 border-gold text-white shadow-[0_0_15px_rgba(212,175,55,0.3)]'
+                                                    : 'bg-black/40 border-gold/10 text-gray-400 hover:border-gold/30'
                                                     }`}
                                             >
                                                 <Venus size={18} className={userData.gender === 'Female' ? 'text-gold' : 'text-gray-500'} />
                                                 <span className="font-bold tracking-widest uppercase text-xs">Female</span>
                                             </button>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-gray-400 text-[10px] uppercase tracking-widest mb-3 px-1 font-black">Age Group</label>
+                                        <div className="grid grid-cols-3 gap-2">
+                                            {['18-25', '26-40', '40+'].map((group) => (
+                                                <button
+                                                    key={group}
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setUserData({ ...userData, ageGroup: group });
+                                                        axios.post(`${API_URL}/analytics/track/age_${group}`);
+                                                    }}
+                                                    className={`py-3 rounded-xl text-[10px] font-bold transition-all border-2 ${userData.ageGroup === group
+                                                        ? 'bg-gold/20 border-gold text-white shadow-[0_0_10px_rgba(212,175,55,0.3)]'
+                                                        : 'bg-black/40 border-gold/10 text-gray-400 hover:border-gold/30'
+                                                        }`}
+                                                >
+                                                    {group}
+                                                </button>
+                                            ))}
                                         </div>
                                     </div>
 

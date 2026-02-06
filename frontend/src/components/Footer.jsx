@@ -80,7 +80,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="border-t border-gold/10 pt-8 flex flex-col md:row justify-between items-center text-gray-500 text-xs text-center md:text-left gap-4">
+                <div className="border-t border-gold/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs text-center md:text-left gap-4">
                     <p>© {new Date().getFullYear()} Star Zone – Unisex Hair & Style Salon. All rights reserved.</p>
                     <p>Designed for Luxury & Elegance</p>
                 </div>

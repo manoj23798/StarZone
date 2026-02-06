@@ -114,7 +114,7 @@ const Home = () => {
                                 className="w-32 md:w-56 lg:w-72 h-auto opacity-95 glint-effect"
                             />
                         </div>
-                        <h1 className="text-6xl md:text-8xl lg:text-9xl font-heading leading-tight pt-4 text-center md:text-left">
+                        <h1 className="text-5xl md:text-8xl lg:text-9xl font-heading leading-tight pt-4 text-center md:text-left">
                             <span className="text-white block tracking-tighter">
                                 {heroTitle.split(' ')[0]}
                             </span>
@@ -128,7 +128,7 @@ const Home = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 1 }}
-                        className="text-gray-300 text-lg md:text-xl font-light tracking-[0.3em] uppercase mb-12 max-w-2xl mx-auto"
+                        className="text-gray-300 text-sm md:text-xl font-light tracking-[0.2em] md:tracking-[0.3em] uppercase mb-10 md:mb-12 max-w-2xl mx-auto"
                     >
                         {heroSubtitle} — {heroTagline}
                     </motion.p>
@@ -162,7 +162,7 @@ const Home = () => {
             </section>
 
             {/* Highlights Section */}
-            <section className="py-24 bg-black-main px-4" >
+            <section className="py-16 md:py-24 bg-black-main px-4" >
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Our Specialties" subtitle="Excellence in every touch" />
 
@@ -191,7 +191,7 @@ const Home = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="py-24 bg-gold relative overflow-hidden" >
+            <section className="py-16 md:py-24 bg-gold relative overflow-hidden" >
                 <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
                     <div className="absolute top-[-50%] left-[-10%] w-[120%] h-[200%] rotate-12 bg-gradient-to-b from-white to-transparent" />
                 </div>
@@ -211,7 +211,7 @@ const Home = () => {
             </section>
 
             {/* Mini Gallery Preview */}
-            <section className="py-24 bg-black-card px-4" >
+            <section className="py-16 md:py-24 bg-black-card px-4" >
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Visual Magic" subtitle="A glimpse of our work" />
 
@@ -237,14 +237,14 @@ const Home = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    className="relative h-[400px] rounded-3xl overflow-hidden group cursor-pointer"
+                                    className="relative h-[300px] md:h-[400px] rounded-3xl overflow-hidden group cursor-pointer"
                                 >
                                     <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-8 md:p-12">
-                                        <h3 className="text-3xl md:text-4xl font-heading text-white mb-2">{item.title}</h3>
-                                        <p className="text-gray-300 text-sm md:text-base mb-6 max-w-sm">{item.desc}</p>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-6 md:p-12">
+                                        <h3 className="text-2xl md:text-4xl font-heading text-white mb-2">{item.title}</h3>
+                                        <p className="text-gray-400 text-xs md:text-base mb-6 max-w-sm">{item.desc}</p>
                                         <Link to={item.link} className="text-gold font-bold flex items-center space-x-2 group/link">
-                                            <span>View Services</span>
+                                            <span className="text-sm md:text-base">View Services</span>
                                             <ArrowRight size={18} className="group-hover/link:translate-x-2 transition-transform" />
                                         </Link>
                                     </div>
@@ -277,11 +277,11 @@ const Home = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: i * 0.1 }}
-                                    className="relative h-[280px] rounded-3xl overflow-hidden group cursor-pointer"
+                                    className="relative h-[220px] md:h-[280px] rounded-3xl overflow-hidden group cursor-pointer"
                                 >
                                     <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
-                                        <h3 className="text-2xl font-heading text-white">{item.title}</h3>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8">
+                                        <h3 className="text-xl md:text-2xl font-heading text-white">{item.title}</h3>
                                     </div>
                                 </motion.div>
                             ))}

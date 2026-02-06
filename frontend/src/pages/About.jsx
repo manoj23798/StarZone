@@ -16,7 +16,7 @@ const About = () => {
             <div className="pt-32 pb-24 px-4 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     {/* Main Content */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 md:mb-32">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -41,9 +41,9 @@ const About = () => {
                             viewport={{ once: true }}
                             className="space-y-6"
                         >
-                            <span className="text-gold font-bold tracking-[0.3em] uppercase text-xs">Royal Experience</span>
-                            <h2 className="text-5xl md:text-7xl font-heading text-white">Your Star Zone Journey</h2>
-                            <p className="text-gray-400 text-lg leading-relaxed flex items-center flex-wrap gap-2">
+                            <span className="text-gold font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-[10px] md:text-xs">Royal Experience</span>
+                            <h2 className="text-4xl md:text-7xl font-heading text-white">Your Star Zone Journey</h2>
+                            <p className="text-gray-400 text-base md:text-lg leading-relaxed flex items-center flex-wrap gap-2">
                                 Welcome to
                                 <span className="flex items-center space-x-2 bg-gold/5 px-3 py-1 rounded-full border border-gold/10">
                                     <img src={aboutImg} alt="Logo" className="h-5 w-auto object-contain" />
@@ -54,14 +54,14 @@ const About = () => {
                             <p className="text-gray-400 leading-relaxed">
                                 Our team of certified professionals is dedicated to providing personalized care. Whether it's a simple trim or a complete bridal transformation, we use only the most premium products to ensure your hair and skin receive the best treatment possible.
                             </p>
-                            <div className="pt-6 grid grid-cols-2 gap-8">
+                            <div className="pt-6 grid grid-cols-2 gap-4 md:gap-8">
                                 <div>
-                                    <p className="text-4xl font-heading text-gold mb-1">5★</p>
-                                    <p className="text-xs tracking-widest text-gray-500 uppercase">Customer Rating</p>
+                                    <p className="text-3xl md:text-4xl font-heading text-gold mb-1">5★</p>
+                                    <p className="text-[10px] md:text-xs tracking-widest text-gray-500 uppercase">Customer Rating</p>
                                 </div>
                                 <div>
-                                    <p className="text-4xl font-heading text-gold mb-1">10+</p>
-                                    <p className="text-xs tracking-widest text-gray-500 uppercase">Expert Stylists</p>
+                                    <p className="text-3xl md:text-4xl font-heading text-gold mb-1">10+</p>
+                                    <p className="text-[10px] md:text-xs tracking-widest text-gray-500 uppercase">Expert Stylists</p>
                                 </div>
                             </div>
                         </motion.div>

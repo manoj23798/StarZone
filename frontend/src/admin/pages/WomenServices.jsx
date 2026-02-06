@@ -35,7 +35,7 @@ const WomenServices = () => {
                 </button>
             </div>
 
-            <div className="admin-card flex items-center space-x-4">
+            <div className="admin-card p-3 flex items-center space-x-4">
                 <Search size={20} className="text-gray-500" />
                 <input
                     type="text"
@@ -57,22 +57,22 @@ const WomenServices = () => {
                             {category.services
                                 .filter(s => s.name.toLowerCase().includes(searchTerm.toLowerCase()))
                                 .map((service, sIdx) => (
-                                    <div key={sIdx} className="admin-card py-3 flex justify-between items-center group">
-                                        <span className="font-medium text-gray-300">{service.name}</span>
-                                        <div className="flex items-center space-x-6">
-                                            <span className="text-gold font-bold">₹{service.price}</span>
+                                    <div key={sIdx} className="admin-card py-3.5 px-4 flex justify-between items-center group hover:border-gold/30 transition-all">
+                                        <span className="text-base font-medium text-gray-300 group-hover:text-gold transition-colors">{service.name}</span>
+                                        <div className="flex items-center space-x-4">
+                                            <span className="text-gold font-black text-lg">₹{service.price}</span>
                                             <div className="flex space-x-1">
                                                 <button
                                                     onClick={() => setEditingService({ gender: 'women', catIdx, sIdx, ...service })}
-                                                    className="p-1.5 hover:bg-gold/10 text-gray-400 hover:text-gold rounded transition-all"
+                                                    className="p-1 hover:bg-gold/10 text-gray-400 hover:text-gold rounded transition-all"
                                                 >
-                                                    <Edit2 size={14} />
+                                                    <Edit2 size={12} />
                                                 </button>
                                                 <button
                                                     onClick={() => deleteService('women', catIdx, sIdx)}
-                                                    className="p-1.5 hover:bg-red-400/10 text-gray-400 hover:text-red-400 rounded transition-all"
+                                                    className="p-1 hover:bg-red-400/10 text-gray-400 hover:text-red-400 rounded transition-all"
                                                 >
-                                                    <Trash2 size={14} />
+                                                    <Trash2 size={12} />
                                                 </button>
                                             </div>
                                         </div>

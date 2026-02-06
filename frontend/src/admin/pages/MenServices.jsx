@@ -35,7 +35,7 @@ const MenServices = () => {
                 </button>
             </div>
 
-            <div className="admin-card flex items-center space-x-4 bg-black-card/50">
+            <div className="admin-card p-3 flex items-center space-x-4 bg-black-card/50">
                 <Search size={20} className="text-gray-500" />
                 <input
                     type="text"
@@ -46,36 +46,36 @@ const MenServices = () => {
                 />
             </div>
 
-            <div className="grid grid-cols-1 gap-6">
+            <div className="columns-1 lg:columns-2 gap-8 space-y-8">
                 {services.men.map((category, catIdx) => (
-                    <div key={category.category} className="space-y-4">
-                        <h3 className="text-lg font-heading text-gold flex items-center space-x-3">
+                    <div key={category.category} className="break-inside-avoid space-y-4">
+                        <h3 className="text-lg font-heading text-gold flex items-center space-x-3 bg-black/30 p-4 rounded-xl">
                             <span>{category.category}</span>
                             <span className="text-[10px] bg-gold/10 px-2 py-0.5 rounded text-gold">{category.services.length}</span>
                         </h3>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="space-y-2">
                             {category.services
                                 .filter(s => s.name.toLowerCase().includes(searchTerm.toLowerCase()))
                                 .map((service, sIdx) => (
-                                    <div key={sIdx} className="admin-card flex flex-col justify-between group">
-                                        <div className="flex justify-between items-start mb-4">
-                                            <span className="font-bold text-white group-hover:text-gold transition-colors">{service.name}</span>
-                                            <span className="text-gold font-black">₹{service.price}</span>
-                                        </div>
-                                        <div className="flex justify-end space-x-2 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <button
-                                                onClick={() => setEditingService({ gender: 'men', catIdx, sIdx, ...service })}
-                                                className="p-2 hover:bg-gold/10 text-gray-500 hover:text-gold rounded-lg transition-all"
-                                            >
-                                                <Edit2 size={16} />
-                                            </button>
-                                            <button
-                                                onClick={() => deleteService('men', catIdx, sIdx)}
-                                                className="p-2 hover:bg-red-400/10 text-gray-500 hover:text-red-400 rounded-lg transition-all"
-                                            >
-                                                <Trash2 size={16} />
-                                            </button>
+                                    <div key={sIdx} className="admin-card py-3.5 px-4 flex justify-between items-center group hover:border-gold/30 transition-all">
+                                        <span className="text-base font-medium text-gray-300 group-hover:text-gold transition-colors">{service.name}</span>
+                                        <div className="flex items-center space-x-4">
+                                            <span className="text-gold font-black text-lg">₹{service.price}</span>
+                                            <div className="flex space-x-1">
+                                                <button
+                                                    onClick={() => setEditingService({ gender: 'men', catIdx, sIdx, ...service })}
+                                                    className="p-1 hover:bg-gold/10 text-gray-400 hover:text-gold rounded transition-all"
+                                                >
+                                                    <Edit2 size={12} />
+                                                </button>
+                                                <button
+                                                    onClick={() => deleteService('men', catIdx, sIdx)}
+                                                    className="p-1 hover:bg-red-400/10 text-gray-400 hover:text-red-400 rounded transition-all"
+                                                >
+                                                    <Trash2 size={12} />
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
