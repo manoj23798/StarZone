@@ -33,14 +33,14 @@ import Footer from './components/Footer';
 import FloatingContact from './components/FloatingContact';
 import ScrollToTop from './components/ScrollToTop';
 
+import { API_URL } from './config';
+
 const PublicLayout = () => {
   useEffect(() => {
     const trackVisit = async () => {
       // Simple session-based tracking to avoid spamming the database
       if (!sessionStorage.getItem('starzone_visited')) {
         try {
-          const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
           // 1. Track general visit
           await fetch(`${API_URL}/analytics/track/visit`, { method: 'POST' });
 

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 const DataContext = createContext();
 
@@ -12,8 +13,6 @@ export const DataProvider = ({ children }) => {
     });
     const [gallery, setGallery] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
     const fetchData = async () => {
         try {

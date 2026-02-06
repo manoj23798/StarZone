@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, CheckCircle2, XCircle, AlertCircle, Save } from 'lucide-react';
 import axios from 'axios';
+import { API_URL } from '../../config';
 
 const SlotManager = () => {
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
@@ -15,8 +16,6 @@ const SlotManager = () => {
         '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM',
         '06:00 PM', '07:00 PM', '08:00 PM', '08:30 PM'
     ];
-
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
     useEffect(() => {
         fetchSlots();

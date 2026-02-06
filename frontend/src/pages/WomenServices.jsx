@@ -6,6 +6,7 @@ import { useData } from '../context/DataContext';
 import { useCart } from '../context/CartContext';
 import { Sparkles, Heart, Star, CloudSun, Plus, Check, Search, X } from 'lucide-react';
 import SEO from '../components/SEO';
+import { API_URL } from '../config';
 
 const WomenServices = () => {
     const { services, loading } = useData();
@@ -17,7 +18,6 @@ const WomenServices = () => {
         const trackVisit = async () => {
             if (!sessionStorage.getItem('starzone_women_visited')) {
                 try {
-                    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
                     await fetch(`${API_URL}/analytics/track/women_visit`, { method: 'POST' });
                     sessionStorage.setItem('starzone_women_visited', 'true');
                 } catch (err) {

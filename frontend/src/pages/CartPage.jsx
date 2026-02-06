@@ -6,6 +6,7 @@ import SectionHeader from '../components/SectionHeader';
 import { Trash2, ClipboardCheck, User, Phone, Send, Scissors, Tag, ChevronRight, MessageSquare, Calendar, Clock, CloudSun, AlertCircle, Venus, Mars } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 const CartPage = () => {
     const { cartItems, removeFromCart, clearCart, totalPrice } = useCart();
@@ -14,7 +15,6 @@ const CartPage = () => {
     const [unavailableSlots, setUnavailableSlots] = useState([]);
     const [slotsLoading, setSlotsLoading] = useState(false);
 
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
     useEffect(() => {
         if (userData.date) {
@@ -57,7 +57,6 @@ const CartPage = () => {
 
         const trackBooking = async () => {
             try {
-                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
                 await axios.post(`${API_URL}/analytics/track/booking`);
             } catch (err) {
                 console.error('Booking tracking failed:', err);

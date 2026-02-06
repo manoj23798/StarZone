@@ -4,13 +4,13 @@ import { useData } from '../../context/DataContext';
 import { Scissors, Image, Phone, ShoppingBag, Users, MousePointer2, Database, Zap, CheckCircle2, Server, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../../config';
 
 const Dashboard = () => {
     const { services, gallery, loading: dataLoading } = useData();
     const [statsData, setStatsData] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
     useEffect(() => {
         fetchDashboardData();
