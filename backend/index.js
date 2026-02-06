@@ -30,6 +30,15 @@ app.use('/api/gallery', galleryRoutes);
 app.use('/api/slots', slotRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
+app.get('/api/health-check', (req, res) => {
+    res.json({
+        status: 'UP',
+        timestamp: new Date().toISOString(),
+        version: '1.0.1',
+        endpoints: ['auth', 'services', 'gallery', 'slots', 'analytics']
+    });
+});
+
 
 // Global Error Handler
 app.use((err, req, res, next) => {
