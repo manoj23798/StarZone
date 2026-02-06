@@ -14,7 +14,6 @@ import nailArt from '../assets/nail-art.jpg';
 import logo from '../assets/logo.png';
 import starAsset from '../assets/star.png';
 
-import { useData } from '../context/DataContext';
 import SEO from '../components/SEO';
 
 const Home = () => {
