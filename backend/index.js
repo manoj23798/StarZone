@@ -21,10 +21,14 @@ app.use((req, res, next) => {
 const authRoutes = require('./src/routes/authRoutes');
 const serviceRoutes = require('./src/routes/serviceRoutes');
 const galleryRoutes = require('./src/routes/galleryRoutes');
+const slotRoutes = require('./src/routes/slotRoutes');
+const analyticsRoutes = require('./src/routes/analyticsRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/gallery', galleryRoutes);
+app.use('/api/slots', slotRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 
 // Global Error Handler

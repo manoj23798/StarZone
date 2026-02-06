@@ -4,6 +4,7 @@ import PageTransition from '../components/PageTransition';
 import SectionHeader from '../components/SectionHeader';
 import { Camera, X } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import SEO from '../components/SEO';
 
 const Gallery = () => {
     const { gallery, loading } = useData();
@@ -18,7 +19,12 @@ const Gallery = () => {
 
     return (
         <PageTransition>
-            <div className="pt-32 pb-24 px-4 min-h-screen">
+            <SEO
+                title="Visual Gallery | Our Best Style & Makeovers"
+                description="Take a visual tour of our work at Star Zone Salon. Real makeovers, bridal excellence, and premium hair artistry."
+                url="/gallery"
+            />
+            <div className="pt-32 pb-24 px-4 min-h-screen overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader
                         title="Our Gallery"

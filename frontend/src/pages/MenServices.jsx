@@ -1,16 +1,39 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import SectionHeader from '../components/SectionHeader';
 import { useData } from '../context/DataContext';
-import { Scissors, Zap, Crown } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { Scissors, Zap, Crown, Plus, Check } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const MenServices = () => {
     const { services, loading } = useData();
+    const { addToCart, cartItems } = useCart();
+    const [addedId, setAddedId] = useState(null);
 
     if (loading || !services) return <div className="h-screen bg-black flex items-center justify-center text-gold font-heading text-2xl">Loading Grooming Menu...</div>;
 
+    const handleAddToCart = (service, category) => {
+        const item = {
+            id: `${category}-${service.name}`,
+            name: service.name,
+            price: service.price,
+            category: category,
+            type: 'service'
+        };
+        addToCart(item);
+        setAddedId(item.id);
+        setTimeout(() => setAddedId(null), 2000);
+    };
+
     return (
         <PageTransition>
+            <SEO
+                title="Grooming Menu | Men's Hair & Services"
+                description="Explore our premium grooming services for men. From expert hair cuts and beard styling to relaxing facials and head massages."
+                url="/men-services"
+            />
             <div className="pt-32 pb-24 px-4 min-h-screen">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader
@@ -36,20 +59,36 @@ const MenServices = () => {
                                 </div>
 
                                 <div className="space-y-4 flex-grow">
-                                    {category.services.map((service, sIdx) => (
-                                        <div
-                                            key={sIdx}
-                                            className="flex justify-between items-end pb-4 group relative"
-                                        >
-                                            <div className="flex-grow">
-                                                <span className="text-white text-lg font-medium group-hover:text-gold transition-colors">{service.name}</span>
-                                                <div className="h-[1px] bg-gold/10 w-full mt-2 group-hover:bg-gold/40 transition-all origin-left scale-x-100 group-hover:scale-[1.02]" />
+                                    {category.services.map((service, sIdx) => {
+                                        const itemId = `${category.category}-${service.name}`;
+                                        const isInCart = cartItems.some(i => i.id === itemId);
+
+                                        return (
+                                            <div
+                                                key={sIdx}
+                                                className="flex justify-between items-center pb-4 group relative border-b border-gold/5 last:border-0"
+                                            >
+                                                <div className="flex-grow">
+                                                    <span className="text-white text-lg font-medium group-hover:text-gold transition-colors">{service.name}</span>
+                                                </div>
+                                                <div className="flex items-center space-x-4">
+                                                    <span className="text-gold font-bold text-xl">₹{service.price}</span>
+                                                    <button
+                                                        onClick={() => handleAddToCart(service, category.category)}
+                                                        className={`p-2 rounded-full transition-all ${addedId === itemId
+                                                            ? 'bg-gold text-black'
+                                                            : isInCart
+                                                                ? 'bg-gold/20 text-gold cursor-default'
+                                                                : 'bg-gold/10 text-gold hover:bg-gold hover:text-black'
+                                                            }`}
+                                                        disabled={isInCart && addedId !== itemId}
+                                                    >
+                                                        {addedId === itemId ? <Check size={16} /> : <Plus size={16} />}
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div className="ml-4 text-right">
-                                                <span className="text-gold font-bold text-xl">₹{service.price}</span>
-                                            </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             </motion.div>
                         ))}

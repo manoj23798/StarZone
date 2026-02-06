@@ -7,7 +7,8 @@ export const DataProvider = ({ children }) => {
         men: [],
         women: [],
         contact: { phones: [], address: '', instagram: '' },
-        homeContent: { heroTitle: 'Star Zone', heroSubtitle: '', heroTagline: '', heroImage: '' }
+        homeContent: { heroTitle: 'Star Zone', heroSubtitle: '', heroTagline: '', heroImage: '' },
+        offers: { slider: [], men: [], women: [] }
     });
     const [gallery, setGallery] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -34,7 +35,8 @@ export const DataProvider = ({ children }) => {
                     ...prev,
                     ...servicesData,
                     contact: servicesData.contact || prev.contact,
-                    homeContent: servicesData.homeContent || prev.homeContent
+                    homeContent: servicesData.homeContent || prev.homeContent,
+                    offers: servicesData.offers || prev.offers
                 }));
             }
 

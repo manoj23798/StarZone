@@ -9,7 +9,9 @@ import {
     Settings,
     LogOut,
     Scissors,
-    X
+    Tag,
+    X,
+    Calendar
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import star from '../../assets/star.png';
@@ -23,7 +25,9 @@ const Sidebar = ({ isOpen, onClose }) => {
         { title: 'Home Editor', icon: <Home size={20} />, path: '/admin/home-editor' },
         { title: 'Men Services', icon: <Scissors size={20} />, path: '/admin/men-services' },
         { title: 'Women Services', icon: <Scissors size={20} />, path: '/admin/women-services' },
+        { title: 'Offers', icon: <Tag size={20} />, path: '/admin/offers' },
         { title: 'Gallery', icon: <Image size={20} />, path: '/admin/gallery' },
+        { title: 'Slot Manager', icon: <Calendar size={20} />, path: '/admin/slots' },
         { title: 'Contact', icon: <Phone size={20} />, path: '/admin/contact' },
         { title: 'Settings', icon: <Settings size={20} />, path: '/admin/settings' },
     ];

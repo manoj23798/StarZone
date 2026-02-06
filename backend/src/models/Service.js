@@ -25,6 +25,25 @@ const servicesSchema = new mongoose.Schema({
         heroSubtitle: String,
         heroTagline: String,
         heroImage: String
+    },
+    offers: {
+        slider: [{
+            title: String,
+            subtitle: String,
+            image: String
+        }],
+        men: [{
+            price: String,
+            services: [String],
+            hoverText: String,
+            prompt: String
+        }],
+        women: [{
+            price: String,
+            services: [String],
+            hoverText: String,
+            prompt: String
+        }]
     }
 }, { timestamps: true });
 

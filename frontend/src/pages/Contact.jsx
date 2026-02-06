@@ -4,6 +4,7 @@ import PageTransition from '../components/PageTransition';
 import SectionHeader from '../components/SectionHeader';
 import { MapPin, Phone, Instagram, Send, Clock } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import SEO from '../components/SEO';
 
 const Contact = () => {
     const { services, loading } = useData();
@@ -42,7 +43,12 @@ const Contact = () => {
 
     return (
         <PageTransition>
-            <div className="pt-32 pb-24 px-4">
+            <SEO
+                title="Contact & Booking | Visit Erode's Best Salon"
+                description="Book your luxury experience at Star Zone Salon today. Find our location in Erode, call us, or send us a WhatsApp message directly."
+                url="/contact"
+            />
+            <div className="pt-32 pb-24 px-4 min-h-screen">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader
                         title="Connect With Us"

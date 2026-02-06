@@ -1,0 +1,230 @@
+.offer-slider-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.offer-slider-container .carousel-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 500px;
+}
+
+.offer-slider-container input {
+    display: none;
+}
+
+/* CAROUSEL / SLIDER */
+.offer-slider-container .carousel {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.offer-slider-container .carousel ul {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 500%;
+    /* 5 slides */
+    display: flex;
+    transition: left 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    left: 0;
+}
+
+.offer-slider-container li {
+    width: 100%;
+    height: 100%;
+}
+
+.offer-slider-container .slide-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.offer-slider-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Shows the full image without cropping */
+    background-color: #0c0c0c;
+    /* Black background to fill gaps */
+}
+
+.offer-slider-container .slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 40px;
+    color: white;
+    text-align: left;
+}
+
+.offer-slider-container .slide-overlay h3 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.offer-slider-container .slide-overlay p {
+    font-size: 1.2rem;
+    margin: 10px 0 0;
+    opacity: 0.9;
+}
+
+/* NAVIGATION DOTS */
+.offer-slider-container .dots-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.offer-slider-container .nav-dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.4s;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.offer-slider-container .nav-dot:hover {
+    background-color: #d4af37;
+    transform: scale(1.2);
+}
+
+/* ARROWS */
+.offer-slider-container .left-arrow,
+.offer-slider-container .right-arrow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #d4af37;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.offer-slider-container .left-arrow {
+    left: 20px;
+}
+
+.offer-slider-container .right-arrow {
+    right: 20px;
+}
+
+.offer-slider-container .left-arrow:hover,
+.offer-slider-container .right-arrow:hover {
+    background: #d4af37;
+    color: black;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Slide Selection Logic */
+#slide1:checked~.carousel ul {
+    left: 0;
+}
+
+#slide2:checked~.carousel ul {
+    left: -100%;
+}
+
+#slide3:checked~.carousel ul {
+    left: -200%;
+}
+
+#slide4:checked~.carousel ul {
+    left: -300%;
+}
+
+#slide5:checked~.carousel ul {
+    left: -400%;
+}
+
+/* Dot Highlight */
+#slide1:checked~.dots-container label[for="slide1"],
+#slide2:checked~.dots-container label[for="slide2"],
+#slide3:checked~.dots-container label[for="slide3"],
+#slide4:checked~.dots-container label[for="slide4"],
+#slide5:checked~.dots-container label[for="slide5"] {
+    background-color: #d4af37;
+    width: 30px;
+    border-radius: 10px;
+}
+
+/* Arrow Visibility */
+#slide1:checked~.left-arrow.arrow-1,
+#slide1:checked~.right-arrow.arrow-1 {
+    display: flex;
+}
+
+#slide2:checked~.left-arrow.arrow-2,
+#slide2:checked~.right-arrow.arrow-2 {
+    display: flex;
+}
+
+#slide3:checked~.left-arrow.arrow-3,
+#slide3:checked~.right-arrow.arrow-3 {
+    display: flex;
+}
+
+#slide4:checked~.left-arrow.arrow-4,
+#slide4:checked~.right-arrow.arrow-4 {
+    display: flex;
+}
+
+#slide5:checked~.left-arrow.arrow-5,
+#slide5:checked~.right-arrow.arrow-5 {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .offer-slider-container .carousel-wrapper {
+        height: 350px;
+    }
+
+    .offer-slider-container .slide-overlay h3 {
+        font-size: 1.5rem;
+    }
+
+    .offer-slider-container .slide-overlay p {
+        font-size: 0.9rem;
+    }
+
+    .offer-slider-container .left-arrow,
+    .offer-slider-container .right-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}

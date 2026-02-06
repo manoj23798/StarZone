@@ -14,6 +14,9 @@ import nailArt from '../assets/nail-art.jpg';
 import logo from '../assets/logo.png';
 import starAsset from '../assets/star.png';
 
+import { useData } from '../context/DataContext';
+import SEO from '../components/SEO';
+
 const Home = () => {
     const { services, loading } = useData();
 
@@ -61,6 +64,11 @@ const Home = () => {
 
     return (
         <PageTransition>
+            <SEO
+                title="Home | Premium Unisex Salon in Erode"
+                description="Welcome to Star Zone Salon. Experience the finest hair styling, bridal makeup, and skin care treatments in Erode. Your radiance starts here."
+                url="/"
+            />
             {/* Hero Section */}
             <section className="relative h-screen flex items-center justify-center overflow-hidden pt-48 md:pt-20">
                 {/* Background Overlay */}

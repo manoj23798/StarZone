@@ -9,13 +9,6 @@ import star from '../../assets/star.png';
 const Layout = () => {
     const { user, loading, logout } = useAuth();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [showNotifications, setShowNotifications] = useState(false);
-
-    const notifications = [
-        { id: 1, text: "System security check passed", time: "2 mins ago" },
-        { id: 2, text: "New service category: 'Bridal' added", time: "1 hour ago" },
-        { id: 3, text: "Gallery size reaching limit (85%)", time: "5 hours ago" },
-    ];
 
     if (loading) return <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="w-12 h-12 border-4 border-gold border-t-transparent rounded-full animate-spin" />
@@ -44,46 +37,6 @@ const Layout = () => {
                     </div>
 
                     <div className="flex items-center space-x-6">
-
-                        <div className="relative">
-                            <button
-                                onClick={() => setShowNotifications(!showNotifications)}
-                                className={`relative p-2 transition-colors ${showNotifications ? 'text-gold' : 'text-gray-400 hover:text-gold'}`}
-                            >
-                                <Bell size={20} />
-                                <span className="absolute top-2 right-2 w-2 h-2 bg-gold rounded-full" />
-                            </button>
-
-                            <AnimatePresence>
-                                {showNotifications && (
-                                    <>
-                                        <div className="fixed inset-0 z-40" onClick={() => setShowNotifications(false)} />
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                            className="absolute right-0 mt-4 w-80 bg-black-card border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden"
-                                        >
-                                            <div className="p-4 border-b border-white/5 flex justify-between items-center">
-                                                <h3 className="font-bold text-sm">Notifications</h3>
-                                                <span className="text-[10px] text-gold font-bold uppercase tracking-widest">3 New</span>
-                                            </div>
-                                            <div className="max-h-96 overflow-y-auto">
-                                                {notifications.map(n => (
-                                                    <div key={n.id} className="p-4 border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer group">
-                                                        <p className="text-xs text-gray-300 group-hover:text-white transition-colors">{n.text}</p>
-                                                        <p className="text-[10px] text-gray-500 mt-1">{n.time}</p>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                            <button className="w-full py-3 text-[10px] text-gray-500 uppercase tracking-widest font-bold hover:text-gold transition-colors">
-                                                View all activity
-                                            </button>
-                                        </motion.div>
-                                    </>
-                                )}
-                            </AnimatePresence>
-                        </div>
 
                         <button
                             onClick={logout}

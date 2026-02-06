@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Exclude private admin pages from search results
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://star-zone.vercel.app/sitemap.xml

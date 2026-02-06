@@ -3,10 +3,16 @@ import PageTransition from '../components/PageTransition';
 import SectionHeader from '../components/SectionHeader';
 import { Target, Eye, Gem } from 'lucide-react';
 import aboutImg from '../assets/about.png';
+import SEO from '../components/SEO';
 
 const About = () => {
     return (
         <PageTransition>
+            <SEO
+                title="Our Story | Excellence in Style"
+                description="Experience the mission of Star Zone Salon. Dedicated to providing premium, personalized grooming experiences for everyone in Erode since inception."
+                url="/about"
+            />
             <div className="pt-32 pb-24 px-4 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     {/* Main Content */}
