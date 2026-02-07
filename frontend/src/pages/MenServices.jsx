@@ -4,7 +4,7 @@ import PageTransition from '../components/PageTransition';
 import SectionHeader from '../components/SectionHeader';
 import { useData } from '../context/DataContext';
 import { useCart } from '../context/CartContext';
-import { Scissors, Zap, Crown, Plus, Check, Search, X } from 'lucide-react';
+import { Scissors, Zap, Crown, Plus, Check, Search, X, Mars } from 'lucide-react';
 import SEO from '../components/SEO';
 import { API_URL } from '../config';
 
@@ -53,7 +53,7 @@ const MenServices = () => {
             <div className="pt-32 pb-24 px-4 min-h-screen">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader
-                        title="Premium Men's Grooming"
+                        title={<div className="flex items-center justify-center gap-3">Premium Men's Grooming <Mars className="text-gold" size={32} md:size={48} /></div>}
                         subtitle="Tailored for the modern gentleman"
                     />
 
