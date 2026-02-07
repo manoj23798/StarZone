@@ -54,7 +54,7 @@ const WomenServices = () => {
             <div className="pt-32 pb-24 px-4 min-h-screen">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader
-                        title={<div className="flex items-center justify-center gap-4">Luxury Beauty Services <img src={WomenLogo} alt="Women" className="w-12 h-12 object-contain" /></div>}
+                        title={<div className="flex items-center justify-center gap-4">Luxury Beauty Services <img src={WomenLogo} alt="Women" className="w-32 h-32 object-contain -my-6" /></div>}
                         subtitle="The royal treatment for every queen"
                     />
 
