@@ -4,9 +4,10 @@ import PageTransition from '../components/PageTransition';
 import SectionHeader from '../components/SectionHeader';
 import { useData } from '../context/DataContext';
 import { useCart } from '../context/CartContext';
-import { Sparkles, Heart, Star, CloudSun, Plus, Check, Search, X, Venus } from 'lucide-react';
+import { Sparkles, Heart, Star, CloudSun, Plus, Check, Search, X } from 'lucide-react';
 import SEO from '../components/SEO';
 import { API_URL } from '../config';
+import WomenLogo from '../assets/women_logo.png';
 
 const WomenServices = () => {
     const { services, loading } = useData();
@@ -53,7 +54,7 @@ const WomenServices = () => {
             <div className="pt-32 pb-24 px-4 min-h-screen">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader
-                        title={<div className="flex items-center justify-center gap-3">Luxury Beauty Services <Venus className="text-gold" size={32} md:size={48} /></div>}
+                        title={<div className="flex items-center justify-center gap-4">Luxury Beauty Services <img src={WomenLogo} alt="Women" className="w-12 h-12 object-contain" /></div>}
                         subtitle="The royal treatment for every queen"
                     />
 
